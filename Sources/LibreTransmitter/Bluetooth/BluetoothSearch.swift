@@ -36,7 +36,7 @@ struct RSSIInfo {
 
 }
 
-final class BluetoothSearchManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
+public final class BluetoothSearchManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
 
     var centralManager: CBCentralManager!
 
@@ -49,7 +49,7 @@ final class BluetoothSearchManager: NSObject, CBCentralManagerDelegate, CBPeriph
 
     public let passThrough = PassthroughSubject<CBPeripheral, Never>()
     public let passThroughMetaData = PassthroughSubject<(CBPeripheral, [String: Any]), Never>()
-    public let throttledRSSI = GenericThrottler(identificator: \RSSIInfo.bledeviceID, interval: 5)
+    let throttledRSSI = GenericThrottler(identificator: \RSSIInfo.bledeviceID, interval: 5)
 
 
     private var rescanTimerBag = Set<AnyCancellable>()
@@ -60,7 +60,7 @@ final class BluetoothSearchManager: NSObject, CBCentralManagerDelegate, CBPeriph
         throttledRSSI.incoming.send(RSSIInfo(bledeviceID: device.identifier.uuidString, signalStrength: rssi))
     }
 
-    override init() {
+    public override init() {
         super.init()
         // calling readrssi on a peripheral is only supported on connected peripherals
         // here we want the AllowDuplicatesKey to be true so that we get a continous feed of new rssi values for
@@ -144,7 +144,7 @@ final class BluetoothSearchManager: NSObject, CBCentralManagerDelegate, CBPeriph
 
     // MARK: - CBCentralManagerDelegate
 
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+    public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         logger.debug("Central Manager did update state to \(String(describing: central.state.rawValue))")
         switch central.state {
         case .poweredOff, .resetting, .unauthorized, .unknown, .unsupported:
@@ -160,7 +160,7 @@ final class BluetoothSearchManager: NSObject, CBCentralManagerDelegate, CBPeriph
         }
     }
 
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi RSSI: NSNumber) {
+    public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi RSSI: NSNumber) {
         guard let name = peripheral.name?.lowercased() else {
             logger.debug("dabear:: could not find name for device \(peripheral.identifier.uuidString)")
             return
@@ -188,22 +188,22 @@ final class BluetoothSearchManager: NSObject, CBCentralManagerDelegate, CBPeriph
         }
     }
 
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+    public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         //self.lastConnectedIdentifier = peripheral.identifier.uuidString
 
     }
 
-    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+    public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         logger.error("did fail to connect")
     }
 
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+    public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         logger.debug("did didDisconnectPeripheral")
     }
 
     // MARK: - CBPeripheralDelegate
 
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         logger.debug("Did discover services")
         if let error = error {
             logger.error("Did discover services error: \(error.localizedDescription)")
@@ -218,7 +218,7 @@ final class BluetoothSearchManager: NSObject, CBCentralManagerDelegate, CBPeriph
         }
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         logger.debug("Did discover characteristics for service \(String(describing: peripheral.name))")
 
         if let error = error {
@@ -243,22 +243,22 @@ final class BluetoothSearchManager: NSObject, CBCentralManagerDelegate, CBPeriph
     }
 
     
-    func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
 
         //throttledRSSI.incoming.send(RSSIInfo(bledeviceID: peripheral.identifier.uuidString, signalStrength: RSSI.intValue))
 
         //peripheral.readRSSI() //we keep contuing to update the rssi (only works if peripheral is already connected....
 
     }
-    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
         logger.debug("Did update notification state for characteristic: \(String(describing: characteristic.debugDescription))")
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         logger.debug("Did update value for characteristic: \(String(describing: characteristic.debugDescription))")
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         logger.debug("Did Write value \(String(characteristic.value.debugDescription)) for characteristic \(String(characteristic.debugDescription))")
     }
 

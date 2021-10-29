@@ -41,8 +41,6 @@ public final class LibreTransmitterManager: LibreTransmitterDelegate {
         return nil
     }
 
-    public var managedDataInterval: TimeInterval?
-
     private func getPersistedSensorDataForDebug() -> String {
         guard let data = UserDefaults.standard.queuedSensorData else {
             return "nil"
@@ -263,8 +261,8 @@ extension LibreTransmitterManager {
 
         let sortedTrends = bleData.trend.sorted{ $0.date > $1.date}
 
-        var glucose = LibreGlucose.fromTrendMeasurements(sortedTrends, nativeCalibrationData: calibrationData, returnAll: UserDefaults.standard.mmBackfillFromTrend)
-        //glucose += LibreGlucose.fromHistoryMeasurements(bleData.history, nativeCalibrationData: calibrationData)
+        let glucose = LibreGlucose.fromTrendMeasurements(sortedTrends, nativeCalibrationData: calibrationData, returnAll: UserDefaults.standard.mmBackfillFromTrend)
+        glucose += LibreGlucose.fromHistoryMeasurements(bleData.history, nativeCalibrationData: calibrationData)
 
         // while libre2 fram scans contains historymeasurements for the last 8 hours,
         // history from bledata contains just a couple of data points, so we don't bother
@@ -295,9 +293,9 @@ extension LibreTransmitterManager {
         }
 
         //todo: predictions also for libre2 bluetooth data
-        //self.latestPrediction = prediction?.first
+//        self.latestPrediction = prediction?.first
 
-//        self.setObservables(sensorData: nil, bleData: bleData, metaData: Device)
+
 
 //        self.logger.debug("dabear:: handleGoodReading returned with \(newGlucose.count) entries")
 //        self.delegateQueue.async {
@@ -370,7 +368,7 @@ extension LibreTransmitterManager {
         }
 
         logger.debug("dabear:: got sensordata with valid crcs, sensor was ready")
-        //self.lastValidSensorData = sensorData
+//        self.lastValidSensorData = sensorData
 
 
 

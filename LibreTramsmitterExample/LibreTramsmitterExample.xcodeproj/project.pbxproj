@@ -12,6 +12,7 @@
 		38567105272C4E3B002C4DD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38567104272C4E3B002C4DD8 /* Assets.xcassets */; };
 		38567108272C4E3B002C4DD8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38567107272C4E3B002C4DD8 /* Preview Assets.xcassets */; };
 		38567111272C4E93002C4DD8 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38567110272C4E93002C4DD8 /* ViewModel.swift */; };
+		3856711B272C51A3002C4DD8 /* LibreTransmitter in Frameworks */ = {isa = PBXBuildFile; productRef = 3856711A272C51A3002C4DD8 /* LibreTransmitter */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,8 +21,9 @@
 		38567102272C4E39002C4DD8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		38567104272C4E3B002C4DD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38567107272C4E3B002C4DD8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		3856710F272C4E66002C4DD8 /* LibreTransmitter */ = {isa = PBXFileReference; lastKnownFileType = folder; name = LibreTransmitter; path = ..; sourceTree = "<group>"; };
 		38567110272C4E93002C4DD8 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		38567118272C5173002C4DD8 /* LibreTransmitter */ = {isa = PBXFileReference; lastKnownFileType = folder; name = LibreTransmitter; path = ..; sourceTree = "<group>"; };
+		3856711C272C5281002C4DD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3856711B272C51A3002C4DD8 /* LibreTransmitter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,9 +41,10 @@
 		385670F4272C4E39002C4DD8 = {
 			isa = PBXGroup;
 			children = (
-				3856710E272C4E66002C4DD8 /* Packages */,
+				38567116272C5115002C4DD8 /* Packages */,
 				385670FF272C4E39002C4DD8 /* LibreTramsmitterExample */,
 				385670FE272C4E39002C4DD8 /* Products */,
+				38567119272C51A3002C4DD8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,6 +59,7 @@
 		385670FF272C4E39002C4DD8 /* LibreTramsmitterExample */ = {
 			isa = PBXGroup;
 			children = (
+				3856711C272C5281002C4DD8 /* Info.plist */,
 				38567100272C4E39002C4DD8 /* LibreTramsmitterExampleApp.swift */,
 				38567102272C4E39002C4DD8 /* ContentView.swift */,
 				38567104272C4E3B002C4DD8 /* Assets.xcassets */,
@@ -72,12 +77,19 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		3856710E272C4E66002C4DD8 /* Packages */ = {
+		38567116272C5115002C4DD8 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				3856710F272C4E66002C4DD8 /* LibreTransmitter */,
+				38567118272C5173002C4DD8 /* LibreTransmitter */,
 			);
 			name = Packages;
+			sourceTree = "<group>";
+		};
+		38567119272C51A3002C4DD8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +108,9 @@
 			dependencies = (
 			);
 			name = LibreTramsmitterExample;
+			packageProductDependencies = (
+				3856711A272C51A3002C4DD8 /* LibreTransmitter */,
+			);
 			productName = LibreTramsmitterExample;
 			productReference = 385670FD272C4E39002C4DD8 /* LibreTramsmitterExample.app */;
 			productType = "com.apple.product-type.application";
@@ -285,7 +300,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"LibreTramsmitterExample/Preview Content\"";
 				DEVELOPMENT_TEAM = BA7ZHP4963;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = LibreTramsmitterExample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -314,7 +330,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"LibreTramsmitterExample/Preview Content\"";
 				DEVELOPMENT_TEAM = BA7ZHP4963;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = LibreTramsmitterExample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -355,6 +372,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3856711A272C51A3002C4DD8 /* LibreTransmitter */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LibreTransmitter;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 385670F5272C4E39002C4DD8 /* Project object */;
 }
