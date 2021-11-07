@@ -221,6 +221,6 @@ class GlucoseSchedule: Codable, CustomStringConvertible {
     }
 
     var description: String {
-         "(from: \(from), to: \(to), low: \(lowAlarm), high: \(highAlarm), enabled: \(enabled))"
+        "(from: \(String(describing: from)), to: \(String(describing: to)), low: \(String(describing: lowAlarm)), high: \(String(describing: highAlarm)), enabled: \(String(describing: enabled)))"
     }
 }

@@ -224,7 +224,7 @@ public extension Libre2 {
         var measurementTrend: [Measurement] = []
         var measurementHistory: [Measurement] = []
         let age = Int(word(data[41], data[40]))
-        let crc = Int(word(data[43], data[42]))
+//        let crc = Int(word(data[43], data[42]))
 
         let bytes = [UInt8](data)
         let calculatedCrc = Crc.crc16(Array(bytes.dropLast(2)), seed: 0xffff)
@@ -272,12 +272,6 @@ public extension Libre2 {
         let history = measurementHistory.sorted(by: { $0.idValue < $1.idValue })
 
         return (age, trend, history, calculatedCrc == enclosedCrc)
-    }
-}
-
-extension UInt16 {
-    init(_ byte0: UInt8, _ byte1: UInt8) {
-        self = Data([byte1, byte0]).withUnsafeBytes { $0.load(as: UInt16.self) }
     }
 }
 

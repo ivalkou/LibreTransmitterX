@@ -167,11 +167,11 @@ public final class LibreTransmitterManager: LibreTransmitterDelegate {
 
     }
 
-    public var managerIdentifier : String {
+    static public var managerIdentifier : String {
         Self.className
     }
 
-    public let localizedTitle = LocalizedString("Libre Bluetooth", comment: "Title for the CGMManager option")
+    static public let localizedTitle = LocalizedString("Libre Bluetooth", comment: "Title for the CGMManager option")
 
     public let appURL: URL? = nil //URL(string: "spikeapp://")
     public let providesBLEHeartbeat = true

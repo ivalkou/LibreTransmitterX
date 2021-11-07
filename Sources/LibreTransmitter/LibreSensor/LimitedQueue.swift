@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import LibreTransmitter
 
 public struct LimitedQueue<T: Codable>: Codable {
   public var array  = [T]()

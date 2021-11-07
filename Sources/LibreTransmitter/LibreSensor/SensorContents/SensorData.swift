@@ -14,16 +14,16 @@ public struct SensorData: Codable {
     /// Parameters for the temperature compensation algorithm
     //let temperatureAlgorithmParameterSet: TemperatureAlgorithmParameters?
 
-    private let headerRange = 0..<24   //  24 bytes, i.e.  3 blocks a 8 bytes
-    private let bodyRange = 24..<320  // 296 bytes, i.e. 37 blocks a 8 bytes
-    private let footerRange = 320..<344  //  24 bytes, i.e.  3 blocks a 8 bytes
+    private var headerRange = 0..<24   //  24 bytes, i.e.  3 blocks a 8 bytes
+    private var bodyRange = 24..<320  // 296 bytes, i.e. 37 blocks a 8 bytes
+    private var footerRange = 320..<344  //  24 bytes, i.e.  3 blocks a 8 bytes
 
     /// The uid of the sensor
     let uuid: Data
     /// The serial number of the sensor
     let serialNumber: String
     /// Number of bytes of sensor data to be used (read only), i.e. 344 bytes (24 for header, 296 for body and 24 for footer)
-    private let numberOfBytes = 344 // Header and body and footer of Freestyle Libre data (i.e. 40 blocks of 8 bytes)
+    private var numberOfBytes = 344 // Header and body and footer of Freestyle Libre data (i.e. 40 blocks of 8 bytes)
     /// Array of 344 bytes as read via nfc
     var bytes: [UInt8]
     /// Subarray of 24 header bytes
@@ -197,7 +197,7 @@ public struct SensorData: Codable {
         return CalibrationInfo(i1: i1, i2: i2, i3: negativei3 ? -i3 : i3, i4: i4, i5: i5, i6: i6, isValidForFooterWithReverseCRCs: Int(self.footerCrc.byteSwapped))
     }
 
-    fileprivate let aday = 86_400.0 //in seconds
+    fileprivate var aday = 86_400.0 //in seconds
 
     var humanReadableSensorAge: String {
         let days = TimeInterval(minutesSinceStart * 60) / aday
@@ -448,15 +448,15 @@ public extension SensorData {
         let futureDate = mostRecentDate.addingTimeInterval(60*minutes)
 
 
-        var glucoseAge = sorted.compactMap { measurement in
+        let glucoseAge = sorted.compactMap { measurement in
             Double(measurement.date.timeIntervalSince1970)
         }
 
-        var rawGlucoseValues = sorted.compactMap { measurement in
+        let rawGlucoseValues = sorted.compactMap { measurement in
             Double(measurement.rawGlucose)
         }
 
-        var glucosePrediction = linearRegression(glucoseAge, rawGlucoseValues)(futureDate.timeIntervalSince1970)
+        let glucosePrediction = linearRegression(glucoseAge, rawGlucoseValues)(futureDate.timeIntervalSince1970)
 
         let predicted = Measurement(date: futureDate,
                                    rawGlucose: Int(glucosePrediction.rounded()),

@@ -37,8 +37,6 @@ extension BubbleResponseType {
             return "serialnumber"
         case .patchInfo:
             return "patchInfo"
-        default:
-            return "unknown"
         }
     }
 }
