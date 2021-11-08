@@ -152,7 +152,7 @@ private struct DeviceItem: View {
 
         }
         .alert(item: $presentableStatus) { status in
-            SwiftUI.Alert(title: Text(status.title), message: Text(status.message) , dismissButton: .default(Text("Got it!")))
+            Alert(title: Text(status.title), message: Text(status.message) , dismissButton: .default(Text("Got it!")))
         }
         .listRowBackground(getRowBackground(device: device))
         .onTapGesture {

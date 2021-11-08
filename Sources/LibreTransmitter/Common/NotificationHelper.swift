@@ -455,6 +455,4 @@ public enum NotificationHelper {
             addRequest(identifier: .sensorExpire, content: content, deleteOld: true)
         }
     }
-
-
 }

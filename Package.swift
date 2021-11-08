@@ -17,7 +17,9 @@ let package = Package(
             path: "RawGlucose.xcframework"),
         .target(
             name: "LibreTransmitter",
-            dependencies: ["RawGlucose"])
+            dependencies: ["RawGlucose"],
+            resources: [.process("LibreTransmitterUI/Graphics")]
+        )
 
     ]
 )

@@ -11,7 +11,6 @@
 		38567103272C4E39002C4DD8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38567102272C4E39002C4DD8 /* ContentView.swift */; };
 		38567105272C4E3B002C4DD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38567104272C4E3B002C4DD8 /* Assets.xcassets */; };
 		38567108272C4E3B002C4DD8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38567107272C4E3B002C4DD8 /* Preview Assets.xcassets */; };
-		38567111272C4E93002C4DD8 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38567110272C4E93002C4DD8 /* ViewModel.swift */; };
 		3856711B272C51A3002C4DD8 /* LibreTransmitter in Frameworks */ = {isa = PBXBuildFile; productRef = 3856711A272C51A3002C4DD8 /* LibreTransmitter */; };
 /* End PBXBuildFile section */
 
@@ -21,7 +20,6 @@
 		38567102272C4E39002C4DD8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		38567104272C4E3B002C4DD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38567107272C4E3B002C4DD8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		38567110272C4E93002C4DD8 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		38567118272C5173002C4DD8 /* LibreTransmitter */ = {isa = PBXFileReference; lastKnownFileType = folder; name = LibreTransmitter; path = ..; sourceTree = "<group>"; };
 		3856711C272C5281002C4DD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,7 +59,6 @@
 				3856711C272C5281002C4DD8 /* Info.plist */,
 				38567102272C4E39002C4DD8 /* ContentView.swift */,
 				38567100272C4E39002C4DD8 /* LibreTramsmitterExampleApp.swift */,
-				38567110272C4E93002C4DD8 /* ViewModel.swift */,
 				38567104272C4E3B002C4DD8 /* Assets.xcassets */,
 				38567106272C4E3B002C4DD8 /* Preview Content */,
 			);
@@ -158,7 +155,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				38567103272C4E39002C4DD8 /* ContentView.swift in Sources */,
-				38567111272C4E93002C4DD8 /* ViewModel.swift in Sources */,
 				38567101272C4E39002C4DD8 /* LibreTramsmitterExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

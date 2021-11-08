@@ -16,20 +16,7 @@ public protocol CGMManagerSetupViewController {
 }
 
 public protocol CGMManagerSetupViewControllerDelegate: AnyObject {
-    func cgmManagerSetupViewController(_ cgmManagerSetupViewController: CGMManagerSetupViewController, didSetUpCGMManager cgmManager: CGMManagerUI)
-}
-
-public protocol CGMManagerUI: CGMManager, DeviceManagerUI {
-    func settingsViewController(for glucoseUnit: HKUnit, glucoseTintColor: Color, guidanceColors: GuidanceColors) -> (UIViewController & CompletionNotifying)
-
-    /// gets the range category of a glucose sample using the CGM manager managed glucose thresholds
-    func glucoseRangeCategory(for glucose: GlucoseSampleValue) -> GlucoseRangeCategory?
-}
-
-extension CGMManagerUI {
-    public func glucoseRangeCategory(for glucose: GlucoseSampleValue) -> GlucoseRangeCategory? {
-        return nil
-    }
+    func cgmManagerSetupViewController(_ cgmManagerSetupViewController: CGMManagerSetupViewController, didSetUpCGMManager cgmManager: LibreTransmitterManager)
 }
 
 class LibreTransmitterSetupViewController: UINavigationController,
@@ -65,8 +52,6 @@ class LibreTransmitterSetupViewController: UINavigationController,
         saveNotifier.listenOnce { [weak self] in
             self?.save()
         }
-
-
 
     }
 

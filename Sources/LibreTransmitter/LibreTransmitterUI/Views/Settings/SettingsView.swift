@@ -183,7 +183,6 @@ struct SettingsView: View {
                 // as an observable in swiftui without bringing in large third party
                 // dependencies or hand crafting it, which would be error prone
 
-
                 let newFactoryInfo = FactoryCalibrationInfo.loadState()
 
                 if newFactoryInfo != self.model.factoryCalibrationInfos.first{
@@ -312,7 +311,7 @@ struct SettingsView: View {
                 showingDestructQuestion = true
             }.foregroundColor(.red)
             .alert(isPresented: $showingDestructQuestion) {
-                SwiftUI.Alert(
+                Alert(
                     title: Text("Are you sure you want to remove this cgm from loop?"),
                     message: Text("There is no undo"),
                     primaryButton: .destructive(Text("Delete")) {
@@ -406,7 +405,7 @@ struct SettingsView: View {
         }
         .listStyle(InsetGroupedListStyle())
         .alert(item: $presentableStatus) { status in
-            SwiftUI.Alert(title: Text(status.title), message: Text(status.message) , dismissButton: .default(Text("Got it!")))
+            Alert(title: Text(status.title), message: Text(status.message) , dismissButton: .default(Text("Got it!")))
         }
 
 

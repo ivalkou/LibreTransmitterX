@@ -437,9 +437,9 @@ extension LibreTransmitterManager {
 // MARK: - Direct bluetooth updates
 extension LibreTransmitterManager {
 
-    public func libreSensorDidUpdate(with bleData: Libre2.LibreBLEResponse, and Device: LibreTransmitterMetadata) {
+    public func libreSensorDidUpdate(with bleData: Libre2.LibreBLEResponse, and device: LibreTransmitterMetadata) {
         self.logger.debug("dabear:: got sensordata: \(String(describing: bleData))")
-        let typeDesc = Device.sensorType().debugDescription
+        let typeDesc = device.sensorType().debugDescription
 
         let now = Date()
         //only once per mins minute
@@ -449,7 +449,7 @@ extension LibreTransmitterManager {
             return
         }
 
-        logger.debug("Directly connected to libresensor of type \(typeDesc). Details:  \(Device.description)")
+        logger.debug("Directly connected to libresensor of type \(typeDesc). Details:  \(device.description)")
 
         guard let mapping = UserDefaults.standard.calibrationMapping,
               let calibrationData = calibrationData,
@@ -524,7 +524,7 @@ extension LibreTransmitterManager {
 
         //todo: predictions also for libre2 bluetooth data
         //self.latestPrediction = prediction?.first
-        self.setObservables(sensorData: nil, bleData: bleData, metaData: Device)
+        self.setObservables(sensorData: nil, bleData: bleData, metaData: device)
 
         self.logger.debug("dabear:: handleGoodReading returned with \(newGlucose.count) entries")
         self.delegateQueue.async {
@@ -542,7 +542,6 @@ extension LibreTransmitterManager {
 
         lastDirectUpdate = Date()
 
-
     }
 }
 
@@ -553,18 +552,18 @@ extension LibreTransmitterManager {
         NotificationHelper.sendNoTransmitterSelectedNotification()
     }
 
-    public func libreTransmitterDidUpdate(with sensorData: SensorData, and Device: LibreTransmitterMetadata) {
+    public func libreTransmitterDidUpdate(with sensorData: SensorData, and device: LibreTransmitterMetadata) {
 
         self.logger.debug("dabear:: got sensordata: \(String(describing: sensorData)), bytescount: \( sensorData.bytes.count), bytes: \(sensorData.bytes)")
         var sensorData = sensorData
 
-        NotificationHelper.sendLowBatteryNotificationIfNeeded(device: Device)
-        self.setObservables(sensorData: nil, bleData: nil, metaData: Device)
+        NotificationHelper.sendLowBatteryNotificationIfNeeded(device: device)
+        self.setObservables(sensorData: sensorData, bleData: nil, metaData: device)
 
          if !sensorData.isLikelyLibre1FRAM {
-            if let patchInfo = Device.patchInfo, let sensorType = SensorType(patchInfo: patchInfo) {
+            if let patchInfo = device.patchInfo, let sensorType = SensorType(patchInfo: patchInfo) {
                 let needsDecryption = [SensorType.libre2, .libreUS14day].contains(sensorType)
-                if needsDecryption, let uid = Device.uid {
+                if needsDecryption, let uid = device.uid {
                     sensorData.decrypt(patchInfo: patchInfo, uid: uid)
                 }
             } else {
@@ -574,9 +573,9 @@ extension LibreTransmitterManager {
             }
         }
 
-        let typeDesc = Device.sensorType().debugDescription
+        let typeDesc = device.sensorType().debugDescription
 
-        logger.debug("Transmitter connected to libresensor of type \(typeDesc). Details:  \(Device.description)")
+        logger.debug("Transmitter connected to libresensor of type \(typeDesc). Details:  \(device.description)")
 
         tryPersistSensorData(with: sensorData)
 

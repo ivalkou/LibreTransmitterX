@@ -16,9 +16,11 @@ private let LibreUsername = "LibreUsername"
 fileprivate var logger = Logger(forType: "KeychainManagerCalibration")
 
 public extension KeychainManagerWrapper {
-    func setLibreNativeCalibrationData(_ calibrationData: SensorData.CalibrationInfo) throws {
-        let credentials: InternetCredentials?
-        credentials = InternetCredentials(username: LibreUsername, password: serializeNativeAlgorithmParameters(calibrationData), url: LibreCalibrationUrl)
+    func setLibreNativeCalibrationData(_ calibrationData: SensorData.CalibrationInfo?) throws {
+        var credentials: InternetCredentials? = nil
+        if let calibrationData = calibrationData {
+            credentials = InternetCredentials(username: LibreUsername, password: serializeNativeAlgorithmParameters(calibrationData), url: LibreCalibrationUrl)
+        }
         logger.debug("dabear: Setting calibrationdata to \(String(describing: calibrationData))")
         try replaceInternetCredentials(credentials, forLabel: LibreCalibrationLabel)
     }

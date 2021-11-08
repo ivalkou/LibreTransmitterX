@@ -9,17 +9,33 @@ import SwiftUI
 import LibreTransmitter
 
 struct ContentView: View {
-    @StateObject var viewModel = ViewModel()
 
     @State var manager = LibreTransmitterManager()
+    @State var setupPresented = false
+    @State var settingsPresented = false
 
     var body: some View {
-//        LibreTransmitterSetupView { manager in
-//            print("ASDF: manager \(manager.metaData)")
-//        } completion: {
-//            print("ASDF: done")
-//        }
+        VStack(spacing: 100) {
+            Button("Setup") {
+                setupPresented = true
+            }
+            Button("Settings") {
+                settingsPresented = true
+            }
+        }
+        .sheet(isPresented: $setupPresented) {
 
-        LibreTransmitterSettingsView(manager: manager)
+        } content: {
+            LibreTransmitterSetupView { manager in
+                print("ASDF: manager \(String(describing: manager.metaData))")
+            } completion: {
+                print("ASDF: done")
+            }
+        }
+        .sheet(isPresented: $settingsPresented) {
+
+        } content: {
+            LibreTransmitterSettingsView(manager: manager)
+        }
     }
 }
