@@ -9,6 +9,9 @@ let package = Package(
         .library(
             name: "LibreTransmitter",
             targets: ["LibreTransmitter"]),
+        .library(
+            name: "RawGlucose",
+            targets: ["RawGlucose"]),
     ],
     dependencies: [],
     targets: [
