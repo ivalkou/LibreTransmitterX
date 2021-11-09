@@ -12,6 +12,7 @@
 		38567105272C4E3B002C4DD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38567104272C4E3B002C4DD8 /* Assets.xcassets */; };
 		38567108272C4E3B002C4DD8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38567107272C4E3B002C4DD8 /* Preview Assets.xcassets */; };
 		3856711B272C51A3002C4DD8 /* LibreTransmitter in Frameworks */ = {isa = PBXBuildFile; productRef = 3856711A272C51A3002C4DD8 /* LibreTransmitter */; };
+		38FEF403273AE2E300574A46 /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FEF402273AE2E300574A46 /* StateModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,8 @@
 		38567107272C4E3B002C4DD8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		38567118272C5173002C4DD8 /* LibreTransmitter */ = {isa = PBXFileReference; lastKnownFileType = folder; name = LibreTransmitter; path = ..; sourceTree = "<group>"; };
 		3856711C272C5281002C4DD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		38FEF3FF2739509400574A46 /* LibreTramsmitterExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LibreTramsmitterExample.entitlements; sourceTree = "<group>"; };
+		38FEF402273AE2E300574A46 /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,11 +59,13 @@
 		385670FF272C4E39002C4DD8 /* LibreTramsmitterExample */ = {
 			isa = PBXGroup;
 			children = (
+				38FEF3FF2739509400574A46 /* LibreTramsmitterExample.entitlements */,
 				3856711C272C5281002C4DD8 /* Info.plist */,
 				38567102272C4E39002C4DD8 /* ContentView.swift */,
 				38567100272C4E39002C4DD8 /* LibreTramsmitterExampleApp.swift */,
 				38567104272C4E3B002C4DD8 /* Assets.xcassets */,
 				38567106272C4E3B002C4DD8 /* Preview Content */,
+				38FEF402273AE2E300574A46 /* StateModel.swift */,
 			);
 			path = LibreTramsmitterExample;
 			sourceTree = "<group>";
@@ -154,6 +159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38FEF403273AE2E300574A46 /* StateModel.swift in Sources */,
 				38567103272C4E39002C4DD8 /* ContentView.swift in Sources */,
 				38567101272C4E39002C4DD8 /* LibreTramsmitterExampleApp.swift in Sources */,
 			);
@@ -283,6 +289,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = LibreTramsmitterExample/LibreTramsmitterExample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LibreTramsmitterExample/Preview Content\"";
@@ -313,6 +320,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = LibreTramsmitterExample/LibreTramsmitterExample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LibreTramsmitterExample/Preview Content\"";

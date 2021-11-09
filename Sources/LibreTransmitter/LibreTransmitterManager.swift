@@ -339,13 +339,6 @@ extension LibreTransmitterManager {
 
             }
 
-
-
-
-
-
-
-
             let formatter = QuantityFormatter()
             let preferredUnit = UserDefaults.standard.mmGlucoseUnit ?? .millimolesPerLiter
 
