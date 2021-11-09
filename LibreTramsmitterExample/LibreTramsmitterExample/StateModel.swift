@@ -10,10 +10,8 @@ import LibreTransmitter
 
 final class StateModel: ObservableObject {
     private let delegateQueue = DispatchQueue(label: "StateModel.delegateQueue")
-
-    init () {
-
-    }
+    @Published var currentGlucose: LibreGlucose?
+    @Published var trend: GlucoseTrend = .flat
 }
 
 extension StateModel: LibreTransmitterManagerDelegate {
@@ -25,13 +23,17 @@ extension StateModel: LibreTransmitterManagerDelegate {
         Date().addingTimeInterval(-3600)
     }
 
-    func cgmManager(_: LibreTransmitterManager, hasNew result: Result<[NewGlucoseSample], Error>) {
+    func cgmManager(_ manager: LibreTransmitterManager, hasNew result: Result<[LibreGlucose], Error>) {
         switch result {
 
         case let .success(data):
-            print("ASDF data: \(data)")
+            print("New data: \(data)")
+            DispatchQueue.main.async {
+                self.trend = manager.glucoseDisplay?.trendType ?? .flat
+                self.currentGlucose = data.first
+            }
         case let .failure(error):
-            print("ASDF error: \(error.localizedDescription)")
+            print("Error: \(error.localizedDescription)")
         }
     }
 

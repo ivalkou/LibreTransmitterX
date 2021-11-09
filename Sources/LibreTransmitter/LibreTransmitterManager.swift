@@ -16,7 +16,7 @@ public protocol LibreTransmitterManagerDelegate: AnyObject {
 
     func startDateToFilterNewData(for: LibreTransmitterManager) -> Date?
 
-    func cgmManager(_:LibreTransmitterManager, hasNew result: Result<[NewGlucoseSample], Error>)
+    func cgmManager(_:LibreTransmitterManager, hasNew result: Result<[LibreGlucose], Error>)
 }
 
 public final class LibreTransmitterManager: LibreTransmitterDelegate {
@@ -31,6 +31,7 @@ public final class LibreTransmitterManager: LibreTransmitterDelegate {
     }
 
     public var glucoseDisplay: GlucoseDisplayable?
+    public var trend: GlucoseTrend?
 
 
     public func libreManagerDidRestoreState(found peripherals: [CBPeripheral], connected to: CBPeripheral?) {
@@ -404,21 +405,11 @@ extension LibreTransmitterManager {
         return startDate?.addingTimeInterval(1)
     }
 
-    func glucosesToSamplesFilter(_ array: [LibreGlucose], startDate: Date?) -> [NewGlucoseSample] {
-
+    func glucosesToSamplesFilter(_ array: [LibreGlucose], startDate: Date?) -> [LibreGlucose] {
         array
-        .filterDateRange(startDate, nil)
-        .filter { $0.isStateValid }
-        .compactMap {
-            return NewGlucoseSample(date: $0.startDate,
-                                    quantity: $0.quantity,
-//                                    trend: nil, //loop only, not for freeapsx
-                         isDisplayOnly: false,
-                         wasUserEntered: false,
-                         syncIdentifier: $0.syncId,
-                         device: device)
-        }
-
+            .filterDateRange(startDate, nil)
+            .filter { $0.isStateValid }
+            .compactMap { $0 }
     }
 
     public var calibrationData: SensorData.CalibrationInfo? {
@@ -495,17 +486,6 @@ extension LibreTransmitterManager {
         }*/
 
         let newGlucose = glucosesToSamplesFilter(glucose, startDate: getStartDateForFilter())
-        /*glucose
-            .filter { $0.isStateValid }
-            .compactMap {
-                return NewGlucoseSample(date: $0.startDate,
-                             quantity: $0.quantity,
-                             isDisplayOnly: false,
-                             wasUserEntered: false,
-                             syncIdentifier: $0.syncId,
-                             device: device)
-            }*/
-
 
         if newGlucose.isEmpty {
             self.countTimesWithoutData &+= 1
@@ -521,7 +501,7 @@ extension LibreTransmitterManager {
 
         self.logger.debug("dabear:: handleGoodReading returned with \(newGlucose.count) entries")
         self.delegateQueue.async {
-            var result: Result<[NewGlucoseSample], Error>
+            var result: Result<[LibreGlucose], Error>
             // If several readings from a valid and running sensor come out empty,
             // we have (with a large degree of confidence) a sensor that has been
             // ripped off the body
@@ -646,7 +626,7 @@ extension LibreTransmitterManager {
 
             self.logger.debug("dabear:: handleGoodReading returned with \(newGlucose.count) entries")
             self.delegateQueue.async {
-                var result: Result<[NewGlucoseSample], Error>
+                var result: Result<[LibreGlucose], Error>
                 // If several readings from a valid and running sensor come out empty,
                 // we have (with a large degree of confidence) a sensor that has been
                 // ripped off the body
