@@ -388,17 +388,10 @@ extension LibreTransmitterManager {
     }
 
     func getStartDateForFilter() -> Date?{
-        //We prefer to use local cached glucose value for the date to filter
-        //todo: fix this for ble packets
-        var startDate = self.latestBackfill?.startDate
+        var startDate: Date?
 
-        //
-        // but that might not be available when loop is restarted for example
-        //
-        if startDate == nil {
-            self.delegateQueue.sync {
-                startDate = self.cgmManagerDelegate?.startDateToFilterNewData(for: self)
-            }
+        self.delegateQueue.sync {
+            startDate = self.cgmManagerDelegate?.startDateToFilterNewData(for: self) ?? self.latestBackfill?.startDate
         }
 
         // add one second to startdate to make this an exclusive (non overlapping) match
