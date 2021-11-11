@@ -11,18 +11,8 @@ import HealthKit
 
 extension UserDefaults {
     private enum Key: String {
-        case mmSyncToNS = "no.bjorninge.mmSyncToNs"
         case mmBackfillFromHistory = "no.bjorninge.mmBackfillFromHistory"
         case mmBackfillFromTrend = "no.bjorninge.mmBackfillFromTrend"
-    }
-
-    var mmSyncToNs: Bool {
-        get {
-             optionalBool(forKey: Key.mmSyncToNS.rawValue) ?? true
-        }
-        set {
-            set(newValue, forKey: Key.mmSyncToNS.rawValue)
-        }
     }
 
     var mmBackfillFromHistory: Bool {

@@ -30,9 +30,6 @@ struct GlucoseSettingsView: View {
 
     }
 
-
-
-    @AppStorage("no.bjorninge.mmSyncToNs") var mmSyncToNS: Bool = true
     @AppStorage("no.bjorninge.mmBackfillFromHistory") var mmBackfillFromHistory: Bool = true
     @AppStorage("no.bjorninge.mmBackfillFromTrend") var mmBackfillFromTrend: Bool = false
     @AppStorage("no.bjorninge.shouldPersistSensorData") var shouldPersistSensorData: Bool = false
@@ -46,9 +43,7 @@ struct GlucoseSettingsView: View {
                 Toggle("Backfill from history", isOn:$mmBackfillFromHistory)
                 Toggle("Backfill from trend", isOn: $mmBackfillFromTrend)
             }
-            Section(header: Text("Remote data storage")) {
-                Toggle("Upload to nightscout", isOn:$mmSyncToNS)
-            }
+
             Section(header: Text("Debug options"), footer: Text("Adds a lot of data to the Issue Report ")) {
                 Toggle("Persist sensordata", isOn:$shouldPersistSensorData)
             }

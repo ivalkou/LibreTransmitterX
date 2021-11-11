@@ -176,12 +176,6 @@ public final class LibreTransmitterManager: LibreTransmitterDelegate {
 
     static public let localizedTitle = LocalizedString("Libre Bluetooth", comment: "Title for the CGMManager option")
 
-    public let appURL: URL? = nil //URL(string: "spikeapp://")
-    public let providesBLEHeartbeat = true
-    public var shouldSyncToRemoteService: Bool {
-        UserDefaults.standard.mmSyncToNs
-    }
-
 
 
     public init() {
@@ -192,8 +186,6 @@ public final class LibreTransmitterManager: LibreTransmitterDelegate {
         //proxy = MiaoMiaoBluetoothManager()
         proxy?.delegate = self
     }
-
-
 
     public func disconnect() {
         logger.debug("dabear:: LibreTransmitterManager disconnect called")
