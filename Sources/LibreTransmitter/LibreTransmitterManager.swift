@@ -17,6 +17,8 @@ public protocol LibreTransmitterManagerDelegate: AnyObject {
     func startDateToFilterNewData(for: LibreTransmitterManager) -> Date?
 
     func cgmManager(_:LibreTransmitterManager, hasNew result: Result<[LibreGlucose], Error>)
+
+    func overcalibration(for: LibreTransmitterManager) -> ((Double) -> (Double))?
 }
 
 public final class LibreTransmitterManager: LibreTransmitterDelegate {
@@ -669,7 +671,22 @@ extension LibreTransmitterManager {
             entries += LibreGlucose.fromHistoryMeasurements(history, nativeCalibrationData: calibration)
         }
 
+        // overcalibrate
+        var overcalibration: ((Double) -> (Double))? = nil
+        delegateQueue.sync { overcalibration = cgmManagerDelegate?.overcalibration(for: self) }
 
+        if let overcalibration = overcalibration {
+            func overcalibrate(entries: [LibreGlucose]) -> [LibreGlucose] {
+                entries.map { entry in
+                    var entry = entry
+                    entry.glucoseDouble = overcalibration(entry.glucoseDouble)
+                    return entry
+                }
+            }
+
+            entries = overcalibrate(entries: entries)
+            prediction = overcalibrate(entries: prediction)
+        }
 
         return (glucose: entries, prediction: prediction)
     }

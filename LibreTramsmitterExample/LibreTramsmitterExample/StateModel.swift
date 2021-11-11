@@ -37,4 +37,7 @@ extension StateModel: LibreTransmitterManagerDelegate {
         }
     }
 
+    func overcalibration(for: LibreTransmitterManager) -> ((Double) -> (Double))? {
+        nil
+    }
 }
