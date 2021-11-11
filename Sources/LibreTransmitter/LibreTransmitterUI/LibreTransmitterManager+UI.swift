@@ -95,6 +95,7 @@ public struct LibreTransmitterSettingsView: UIViewControllerRepresentable {
         wantToTerminateNotifier.listenOnce { [weak nav] in
             manager.logger.debug("CGM wants to terminate")
             manager.disconnect()
+            UserDefaults.standard.preSelectedDevice = nil
             context.coordinator.delete?()
             nav?.notifyComplete()
         }

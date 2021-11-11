@@ -121,7 +121,9 @@ public final class BluetoothSearchManager: NSObject, CBCentralManagerDelegate, C
 
             logger.debug("Will scan for the following services: \(String(describing: allServices))")
 
-            centralManager.scanForPeripherals(withServices: allServices, options: nil)
+
+            // nil because miamiao1 not advertising it's services
+            centralManager.scanForPeripherals(withServices: nil, options:nil)
 
 
             // Ugly hack to be able to update rssi continously without connecting to peripheral
