@@ -136,10 +136,6 @@ public enum NotificationHelper {
     }
 
     public static func sendInvalidChecksumIfDeveloper(_ sensorData: SensorData) {
-        guard UserDefaults.standard.dangerModeActivated else {
-            return
-        }
-
         if sensorData.hasValidCRCs {
             return
         }

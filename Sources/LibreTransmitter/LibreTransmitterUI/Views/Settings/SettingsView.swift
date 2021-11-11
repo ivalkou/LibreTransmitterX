@@ -145,20 +145,7 @@ struct SettingsView: View {
             }
     }
 
-
     static let formatter = NumberFormatter()
-
-    var dangerModeActivated : Binding<String> = ({
-        Binding(
-            get: { UserDefaults.standard.dangerModeActivated ? "Activated" : "Not activated" },
-            set: { newVal in
-                //UserDefaults.standard.dangerModeActivated = newVal
-                //we dont support setting it currently
-            })
-    }
-
-    )()
-
 
     // no navigationview necessary when running inside a uihostingcontroller
     // uihostingcontroller seems to add a navigationview for us, causing problems if we
@@ -346,18 +333,6 @@ struct SettingsView: View {
                     SettingsItem(title: "Notifications", detail: .constant(""))
                 }
             }
-
-
-            // Decided against adding ui for activating danger mode this time
-            // Consider doing it in the future, but no rush. dangermode is only used for calibrationedit and bluetooth devices debugging.
-
-
-            SettingsItem(title: "Danger mode", detail: dangerModeActivated)
-                .onTapGesture {
-                    print("danger mode tapped")
-                    presentableStatus = StatusMessage(title: "Danger mode", message: "Danger mode was a legacy ui only feature")
-                }
-
         }
     }
 

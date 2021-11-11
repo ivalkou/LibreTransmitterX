@@ -172,19 +172,7 @@ public final class BluetoothSearchManager: NSObject, CBCentralManagerDelegate, C
             //peripheral.delegate = self
             //peripheral.readRSSI()
         } else {
-            if UserDefaults.standard.dangerModeActivated {
-                //allow listing any device when danger mode is active
-
-                let name = String(describing: peripheral.name)
-
-                logger.debug("dabear:: did add unknown device due to dangermode being active \(name): \(peripheral.identifier)")
-                self.addDiscoveredDevice(peripheral, with: advertisementData, rssi: RSSI.intValue)
-                //peripheral.delegate = self
-                //peripheral.readRSSI()
-
-            } else {
-                logger.debug("dabear:: did not add unknown device: \(name): \(peripheral.identifier)")
-            }
+            logger.debug("dabear:: did not add unknown device: \(name): \(peripheral.identifier)")
         }
     }
 

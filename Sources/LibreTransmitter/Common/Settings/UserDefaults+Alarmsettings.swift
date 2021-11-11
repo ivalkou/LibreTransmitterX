@@ -24,7 +24,6 @@ extension UserDefaults {
         case mmGlucoseUnit = "no.bjorninge.mmGlucoseUnit"
         case mmAlertSensorSoonExpire = "no.bjorninge.mmAlertSensorSoonExpire"
         case mmSnoozedUntil = "no.bjorninge.mmSnoozedUntil"
-        case mmDangerMode = "no.bjorninge.mmDangerModeActivated"
         case mmShowPhoneBattery = "no.bjorninge.mmShowPhoneBattery"
         case mmShowTransmitterBattery = "no.bjorninge.mmShowTransmitterBattery"
     }
@@ -134,15 +133,6 @@ extension UserDefaults {
 
     var allNotificationToggles: [Bool] {
         [mmAlwaysDisplayGlucose, mmAlertLowBatteryWarning, mmAlertInvalidSensorDetected, mmAlertNewSensorDetected, mmAlertNoSensorDetected, mmAlertWillSoonExpire, mmGlucoseAlarmsVibrate, mmShowPhoneBattery, mmShowTransmitterBattery]
-    }
-
-    var dangerModeActivated: Bool {
-        get {
-            optionalBool(forKey: Key.mmDangerMode.rawValue) ?? false
-        }
-        set {
-            set(newValue, forKey: Key.mmDangerMode.rawValue)
-        }
     }
 
     //intentionally only supports mgdl and mmol
