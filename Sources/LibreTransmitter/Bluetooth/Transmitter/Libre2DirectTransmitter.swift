@@ -24,7 +24,7 @@ class Libre2DirectTransmitter: LibreTransmitterProxyProtocol {
     }
 
     class var smallImage: UIImage? {
-        UIImage(named: "libresensor", in: Bundle.current, compatibleWith: nil)
+        UIImage(named: "libresensor", in: Bundle.module, compatibleWith: nil)
     }
 
     class var shortTransmitterName: String {

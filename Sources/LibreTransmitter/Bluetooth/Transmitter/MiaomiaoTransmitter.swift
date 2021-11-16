@@ -194,7 +194,7 @@ class MiaoMiaoTransmitter: LibreTransmitterProxyProtocol {
     }
 
     class var smallImage: UIImage? {
-        UIImage(named: "miaomiao-small", in: Bundle.current, compatibleWith: nil)
+        UIImage(named: "miaomiao-small", in: Bundle.module, compatibleWith: nil)
     }
 
     class var shortTransmitterName: String {
