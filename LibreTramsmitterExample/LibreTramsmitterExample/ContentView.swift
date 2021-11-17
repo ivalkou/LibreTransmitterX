@@ -31,7 +31,10 @@ struct ContentView: View {
 
             Button("Libre Transmitter") {
                 setupPresented = true
+            }
 
+            Button("Test alert sound") {
+                NotificationHelper.vibrateIfNeeded(count: 3)
             }
         }
         .sheet(isPresented: $setupPresented) {} content: {

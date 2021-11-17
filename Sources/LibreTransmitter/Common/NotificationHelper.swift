@@ -12,6 +12,7 @@ import HealthKit
 import UserNotifications
 import os.log
 import UIKit
+import AudioToolbox
 
 fileprivate var logger = Logger(forType: "NotificationHelper")
 
@@ -39,11 +40,11 @@ public enum NotificationHelper {
     }
 
     private static func vibrate(times: Int) {
-        guard times >= 0 else {
+        guard times > 0 else {
             return
         }
 
-        AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate) {
+        AudioServicesPlaySystemSoundWithCompletion(SystemSoundID(1336)) {
             vibrate(times: times - 1)
         }
     }
