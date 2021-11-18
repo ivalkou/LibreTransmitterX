@@ -34,7 +34,7 @@ struct ContentView: View {
             }
 
             Button("Test alert sound") {
-                NotificationHelper.vibrateIfNeeded(count: 3)
+                NotificationHelper.playSoundIfNeeded()
             }
         }
         .sheet(isPresented: $setupPresented) {} content: {

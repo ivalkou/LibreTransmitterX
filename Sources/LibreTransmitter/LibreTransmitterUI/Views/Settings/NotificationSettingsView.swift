@@ -104,7 +104,7 @@ struct NotificationSettingsView: View {
 
             Toggle("Adds Phone Battery", isOn: $mmShowPhoneBattery)
             Toggle("Adds Transmitter Battery", isOn: $mmShowTransmitterBattery)
-            Toggle("Also vibrate", isOn: $mmGlucoseAlarmsVibrate)
+            Toggle("Also play alert sound", isOn: $mmGlucoseAlarmsVibrate)
 
         }
     }

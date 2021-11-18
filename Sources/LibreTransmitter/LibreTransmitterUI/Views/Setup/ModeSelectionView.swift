@@ -18,7 +18,7 @@ struct ModeSelectionView: View {
 
             ZStack {
                 NavigationLink(destination: Libre2DirectSetup(cancelNotifier: cancelNotifier, saveNotifier: saveNotifier)) {
-                    SettingsItem(title: "Libre 2 Direct", detail: .constant(""))
+                    SettingsItem(title: NSLocalizedString("Libre 2 Direct", comment: "Libre 2 Direct"), detail: .constant(""))
                         .padding(.top, 30)
                         .padding(.bottom, 30)
                 }
@@ -26,7 +26,7 @@ struct ModeSelectionView: View {
 
             ZStack {
                 NavigationLink(destination: BluetoothSelection(cancelNotifier: cancelNotifier, saveNotifier: saveNotifier)) {
-                    SettingsItem(title: "Bluetooth Transmitters", detail: .constant(""))
+                    SettingsItem(title: NSLocalizedString("Bluetooth Transmitters", comment: "Bluetooth Transmitters"), detail: .constant(""))
                         .padding(.top, 30)
                         .padding(.bottom, 30)
                 }

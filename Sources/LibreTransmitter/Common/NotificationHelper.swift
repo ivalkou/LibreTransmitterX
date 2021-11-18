@@ -33,19 +33,19 @@ public enum NotificationHelper {
         case restoredState = "no.bjorninge.miaomiao.state-notification"
     }
 
-    public static func vibrateIfNeeded(count: Int = 3) {
+    public static func playSoundIfNeeded(count: Int = 3) {
         if UserDefaults.standard.mmGlucoseAlarmsVibrate {
-            vibrate(times: count)
+            playSound(times: count)
         }
     }
 
-    private static func vibrate(times: Int) {
+    private static func playSound(times: Int) {
         guard times > 0 else {
             return
         }
 
         AudioServicesPlaySystemSoundWithCompletion(SystemSoundID(1336)) {
-            vibrate(times: times - 1)
+            playSound(times: times - 1)
         }
     }
 
@@ -58,7 +58,7 @@ public enum NotificationHelper {
             logger.debug("dabear:: sending RestoredStateNotification")
 
             let content = UNMutableNotificationContent()
-            content.title = "State was restored"
+            content.title = NSLocalizedString("State was restored", comment: "State was restored")
             content.body = msg
 
             addRequest(identifier: .restoredState, content: content )
@@ -70,8 +70,8 @@ public enum NotificationHelper {
             logger.debug("dabear:: sending BluetoothPowerOffNotification")
 
             let content = UNMutableNotificationContent()
-            content.title = "Bluetooth Power Off"
-            content.body = "Please turn on Bluetooth"
+            content.title = NSLocalizedString("Bluetooth Power Off", comment: "Bluetooth Power Off")
+            content.body = NSLocalizedString("Please turn on Bluetooth", comment: "Please turn on Bluetooth")
 
             addRequest(identifier: .bluetoothPoweredOff, content: content)
         }
@@ -82,8 +82,8 @@ public enum NotificationHelper {
             logger.debug("dabear:: sending NoTransmitterSelectedNotification")
 
             let content = UNMutableNotificationContent()
-            content.title = "No Libre Transmitter Selected"
-            content.body = "Delete CGMManager and start anew. Your libreoopweb credentials will be preserved"
+            content.title = NSLocalizedString("No Libre Transmitter Selected", comment: "No Libre Transmitter Selected")
+            content.body = NSLocalizedString("Delete Transmitter and start anew.", comment: "Delete Transmitter and start anew.")
 
             addRequest(identifier: .noBridgeSelected, content: content)
         }
@@ -143,8 +143,8 @@ public enum NotificationHelper {
 
         ensureCanSendNotification {
             let content = UNMutableNotificationContent()
-            content.title = "Invalid libre checksum"
-            content.body = "Libre sensor was incorrectly read, CRCs were not valid"
+            content.title = NSLocalizedString("Invalid libre checksum", comment: "Invalid libre checksum")
+            content.body = NSLocalizedString("Libre sensor was incorrectly read, CRCs were not valid", comment: "Libre sensor was incorrectly read, CRCs were not valid")
 
             addRequest(identifier: .invalidChecksum, content: content)
         }
@@ -208,29 +208,29 @@ public enum NotificationHelper {
             var body2 = [String]()
             switch alarm {
             case .none:
-                titles.append("Glucose")
+                titles.append(LocalizedString("Glucose", comment: "Glucose"))
             case .low:
-                titles.append("LOWALERT!")
+                titles.append(LocalizedString("LOWALERT!", comment: "LOWALERT!"))
             case .high:
-                titles.append("HIGHALERT!")
+                titles.append(LocalizedString("HIGHALERT!", comment: "HIGHALERT!"))
             }
 
             if isSnoozed {
-                titles.append("(Snoozed)")
+                titles.append(NSLocalizedString("(Snoozed)", comment: "(Snoozed)"))
             } else if alarm.isAlarming() {
                 content.sound = .default
-                vibrateIfNeeded()
+                playSoundIfNeeded()
             }
             titles.append(glucoseDesc)
 
-            body.append("Glucose: \(glucoseDesc)")
+            body.append(String(format: NSLocalizedString("Glucose: %@", comment: "Glucose: %@"), glucoseDesc))
 
             if let oldValue = oldValue {
                 body.append( LibreGlucose.glucoseDiffDesc(oldValue: oldValue, newValue: glucose))
             }
 
-            if let trend = trend?.localizedDescription {
-                body.append("\(trend)")
+            if let trendSymbol = trend?.symbol {
+                body.append("\(trendSymbol)")
             }
 
             if showPhoneBattery {
@@ -239,11 +239,11 @@ public enum NotificationHelper {
                 }
 
                 let battery = Double(UIDevice.current.batteryLevel * 100 ).roundTo(places: 1)
-                body2.append("Phone: \(battery)%")
+                body2.append(String(format: NSLocalizedString("Phone: %@%%", comment: "Phone: %@%%"), battery))
             }
 
             if let transmitterBattery = transmitterBattery {
-                body2.append("Transmitter: \(transmitterBattery)")
+                body2.append(String(format: NSLocalizedString("Transmitter: %@", comment: "Transmitter: %@"), transmitterBattery))
             }
 
             //these are texts that naturally fit on their own line in the body
@@ -271,8 +271,8 @@ public enum NotificationHelper {
         ensureCanSendNotification {
             let content = UNMutableNotificationContent()
             content.sound = .default
-            content.title = "Extracting calibrationdata from sensor"
-            content.body = calibrationMessage.rawValue
+            content.title = NSLocalizedString("Extracting calibrationdata from sensor", comment: "Extracting calibrationdata from sensor")
+            content.body = NSLocalizedString(calibrationMessage.rawValue, comment: "calibrationMessage")
 
             addRequest(identifier: .calibrationOngoing,
                        content: content,
@@ -292,8 +292,8 @@ public enum NotificationHelper {
     private static func sendSensorNotDetectedNotification() {
         ensureCanSendNotification {
             let content = UNMutableNotificationContent()
-            content.title = "No Sensor Detected"
-            content.body = "This might be an intermittent problem, but please check that your transmitter is tightly secured over your sensor"
+            content.title = NSLocalizedString("No Sensor Detected", comment: "No Sensor Detected")
+            content.body = NSLocalizedString("This might be an intermittent problem, but please check that your transmitter is tightly secured over your sensor", comment: "This might be an intermittent problem, but please check that your transmitter is tightly secured over your sensor")
 
             addRequest(identifier: .noSensorDetected, content: content)
         }
@@ -310,8 +310,8 @@ public enum NotificationHelper {
     private static func sendSensorChangeNotification() {
         ensureCanSendNotification {
             let content = UNMutableNotificationContent()
-            content.title = "New Sensor Detected"
-            content.body = "Please wait up to 30 minutes before glucose readings are available!"
+            content.title = NSLocalizedString("New Sensor Detected", comment: "New Sensor Detected")
+            content.body = NSLocalizedString("Please wait up to 30 minutes before glucose readings are available!", comment: "Please wait up to 30 minutes before glucose readings are available!")
 
             addRequest(identifier: .sensorChange, content: content)
             //content.sound = UNNotificationSound.
@@ -322,8 +322,8 @@ public enum NotificationHelper {
     public static func sendSensorTryAgainLaterNotification() {
         ensureCanSendNotification {
             let content = UNMutableNotificationContent()
-            content.title = "Invalid Glucose sample detected, try again later"
-            content.body = "Sensor might have temporarily stopped, fallen off or is too cold or too warm"
+            content.title = NSLocalizedString("Invalid Glucose sample detected, try again later", comment: "Invalid Glucose sample detected, try again later")
+            content.body = NSLocalizedString("Sensor might have temporarily stopped, fallen off or is too cold or too warm", comment: "Sensor might have temporarily stopped, fallen off or is too cold or too warm")
 
             addRequest(identifier: .tryAgainLater, content: content)
             //content.sound = UNNotificationSound.
@@ -347,12 +347,12 @@ public enum NotificationHelper {
     private static func sendInvalidSensorNotification(sensorData: SensorData) {
         ensureCanSendNotification {
             let content = UNMutableNotificationContent()
-            content.title = "Invalid Sensor Detected"
+            content.title = NSLocalizedString("Invalid Sensor Detected", comment: "Invalid Sensor Detected")
 
             if !sensorData.isLikelyLibre1FRAM {
-                content.body = "Detected sensor seems not to be a libre 1 sensor!"
+                content.body = NSLocalizedString("Detected sensor seems not to be a libre 1 sensor!", comment: "Detected sensor seems not to be a libre 1 sensor!")
             } else if !(sensorData.state == .starting || sensorData.state == .ready) {
-                content.body = "Detected sensor is invalid: \(sensorData.state.description)"
+                content.body = String(format: NSLocalizedString("Detected sensor is invalid: %@", comment: "Detected sensor is invalid: %@"), sensorData.state.description)
             }
 
             content.sound = .default
@@ -396,8 +396,10 @@ public enum NotificationHelper {
     private static func sendLowBatteryNotification(batteryPercentage: String, deviceName: String) {
         ensureCanSendNotification {
             let content = UNMutableNotificationContent()
-            content.title = "Low Battery"
-            content.body = "Battery is running low (\(batteryPercentage)), consider charging your \(deviceName) device as soon as possible"
+            content.title = NSLocalizedString("Low Battery", comment: "Low Battery")
+            content.body = String(format: NSLocalizedString("Battery is running low %@, consider charging your %@ device as soon as possible", comment: ""), batteryPercentage, deviceName)
+
+
             content.sound = .default
 
             addRequest(identifier: .lowBattery, content: content)
@@ -446,8 +448,8 @@ public enum NotificationHelper {
             let dynamicText =  hours <= 1 ?  "minutes: \(minutesLeft.twoDecimals)" : "hours: \(hours.twoDecimals)"
 
             let content = UNMutableNotificationContent()
-            content.title = "Sensor Ending Soon"
-            content.body = "Current Sensor is Ending soon! Sensor Life left in \(dynamicText)"
+            content.title = NSLocalizedString("Sensor Ending Soon", comment: "Sensor Ending Soon")
+            content.body = String(format: NSLocalizedString("Current Sensor is Ending soon! Sensor Life left in %@", comment: ""), dynamicText)
 
             addRequest(identifier: .sensorExpire, content: content, deleteOld: true)
         }
