@@ -22,7 +22,7 @@ public struct SettingsItem: View {
 
     //basically allows caller to set a static string without having to use .constant
     init(title: String, detail: String) {
-        self.title = NSLocalizedString(title, comment: "Item title") 
+        self.title = title
         self._detail = Binding<String>(get: {
             detail
         }, set: { newVal in
@@ -32,7 +32,7 @@ public struct SettingsItem: View {
 
     public var body: some View {
         HStack {
-            Text(title)
+            Text(NSLocalizedString(title, comment: "Item title"))
             Spacer()
             Text(detail).font(.subheadline)
         }
