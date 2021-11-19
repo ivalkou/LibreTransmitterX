@@ -65,17 +65,17 @@ struct SnoozeView: View {
 
         switch activeAlarms {
             case .high:
-                celltext = "High Glucose Alarm active"
+                celltext = NSLocalizedString("High Glucose Alarm active", comment: "High Glucose Alarm active")
             case .low:
-                celltext = "Low Glucose Alarm active"
+                celltext = NSLocalizedString("Low Glucose Alarm active", comment: "Low Glucose Alarm active")
             case .none:
-                celltext = "No Glucose Alarm active"
+                celltext = NSLocalizedString("No Glucose Alarm active", comment: "No Glucose Alarm active")
         }
 
         if let until = GlucoseScheduleList.snoozedUntil {
-            snoozeDescription = "snoozing until \(until.description(with: .current))"
+            snoozeDescription = String(format: NSLocalizedString("snoozing until %@", comment: "snoozing until %@"), until.description(with: .current))
         } else {
-            snoozeDescription = "not snoozing"
+            snoozeDescription = NSLocalizedString("not snoozing", comment: "not snoozing")  
         }
 
         return [celltext, snoozeDescription].joined(separator: ", ")

@@ -39,7 +39,8 @@ public final class LibreTransmitterManager: LibreTransmitterDelegate {
     public func libreManagerDidRestoreState(found peripherals: [CBPeripheral], connected to: CBPeripheral?) {
         let devicename = to?.name  ?? "no device"
         let id = to?.identifier.uuidString ?? "null"
-        let msg = "Bluetooth State restored (Loop restarted?). Found \(peripherals.count) peripherals, and connected to \(devicename) with identifier \(id)"
+        let msg = String(format: NSLocalizedString("Bluetooth State restored (APS restarted?). Found %d peripherals, and connected to %@ with identifier %@", comment: "Restored state message"), peripherals.count, devicename, id)
+
         NotificationHelper.sendRestoredStateNotification(msg: msg)
     }
 
