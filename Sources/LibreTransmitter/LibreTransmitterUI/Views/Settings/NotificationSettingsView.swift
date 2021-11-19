@@ -49,8 +49,6 @@ struct NotificationSettingsView: View {
 
         case mmAlertSensorSoonExpire = "no.bjorninge.mmAlertSensorSoonExpire"
 
-
-        case mmShowPhoneBattery = "no.bjorninge.mmShowPhoneBattery"
         case mmShowTransmitterBattery = "no.bjorninge.mmShowTransmitterBattery"
 
         //handle specially:
@@ -63,7 +61,6 @@ struct NotificationSettingsView: View {
 
     @AppStorage(Key.mmAlwaysDisplayGlucose.rawValue) var mmAlwaysDisplayGlucose: Bool = true
     @AppStorage(Key.mmNotifyEveryXTimes.rawValue) var mmNotifyEveryXTimes: Int = 0
-    @AppStorage(Key.mmShowPhoneBattery.rawValue) var mmShowPhoneBattery: Bool = false
     @AppStorage(Key.mmShowTransmitterBattery.rawValue) var mmShowTransmitterBattery: Bool = true
 
 
@@ -102,7 +99,6 @@ struct NotificationSettingsView: View {
 
             }.clipped()
 
-            Toggle("Adds Phone Battery", isOn: $mmShowPhoneBattery)
             Toggle("Adds Transmitter Battery", isOn: $mmShowTransmitterBattery)
             Toggle("Also play alert sound", isOn: $mmGlucoseAlarmsVibrate)
 

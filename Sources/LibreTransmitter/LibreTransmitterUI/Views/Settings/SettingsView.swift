@@ -22,7 +22,7 @@ public struct SettingsItem: View {
 
     //basically allows caller to set a static string without having to use .constant
     init(title: String, detail: String) {
-        self.title = title
+        self.title = NSLocalizedString(title, comment: "Item title") 
         self._detail = Binding<String>(get: {
             detail
         }, set: { newVal in
@@ -351,16 +351,15 @@ struct SettingsView: View {
 
     var overview: some View {
         List {
-
             snoozeSection
             measurementSection
             if !glucoseMeasurement.predictionDate.isEmpty{
                 predictionSection
             }
+            advancedSection
             sensorInfoSection
             transmitterInfoSection
-            factoryCalibrationSection
-            advancedSection
+//            factoryCalibrationSection
 
             //disable for now due to null byte document issues
             if true {

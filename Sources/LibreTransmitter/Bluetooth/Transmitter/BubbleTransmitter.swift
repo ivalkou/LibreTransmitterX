@@ -143,8 +143,8 @@ class BubbleTransmitter: MiaoMiaoTransmitter {
         bLogger.debug("dabear:: bubble value is: \(value.toDebugString())")
         switch bubbleResponseState {
         case .bubbleInfo:
-            //let hardware = value[value.count-2].description + "." + value[value.count-1].description
-            //let firmware = value[2].description + "." + value[3].description
+            hardware = value[value.count-2].description + "." + value[value.count-1].description
+            firmware = value[2].description + "." + value[3].description
            //let patchInfo = Data(Double(firmware)! < 1.35 ? value[3...8] : value[5...10])
             battery = Int(value[4])
 

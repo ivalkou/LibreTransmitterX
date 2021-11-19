@@ -164,7 +164,6 @@ public enum NotificationHelper {
         let alarm = schedules?.getActiveAlarms(glucose.glucoseDouble) ?? .none
         let isSnoozed = GlucoseScheduleList.isSnoozed()
 
-        let shouldShowPhoneBattery = UserDefaults.standard.mmShowPhoneBattery
         let transmitterBattery = UserDefaults.standard.mmShowTransmitterBattery && battery != nil ? battery : nil
 
         logger.debug("dabear:: glucose alarmtype is \(String(describing:alarm))")
@@ -172,7 +171,7 @@ public enum NotificationHelper {
         // even if glucose notifications are disabled in the UI
 
         if shouldSend || alarm.isAlarming() {
-            sendGlucoseNotitifcation(glucose: glucose, oldValue: oldValue, alarm: alarm, isSnoozed: isSnoozed, trend: trend, showPhoneBattery: shouldShowPhoneBattery, transmitterBattery: transmitterBattery)
+            sendGlucoseNotitifcation(glucose: glucose, oldValue: oldValue, alarm: alarm, isSnoozed: isSnoozed, trend: trend, transmitterBattery: transmitterBattery)
         } else {
             logger.debug("dabear:: not sending glucose, shouldSend and alarmIsActive was false")
             return
@@ -199,7 +198,7 @@ public enum NotificationHelper {
             logger.debug("dabear:: sending \(identifier.rawValue) notification")
         }
     }
-    private static func sendGlucoseNotitifcation(glucose: LibreGlucose, oldValue: LibreGlucose?, alarm: GlucoseScheduleAlarmResult = .none, isSnoozed: Bool = false, trend: GlucoseTrend?, showPhoneBattery: Bool = false, transmitterBattery: String?) {
+    private static func sendGlucoseNotitifcation(glucose: LibreGlucose, oldValue: LibreGlucose?, alarm: GlucoseScheduleAlarmResult = .none, isSnoozed: Bool = false, trend: GlucoseTrend?, transmitterBattery: String?) {
         ensureCanSendGlucoseNotification { _ in
             let content = UNMutableNotificationContent()
             let glucoseDesc = glucose.description
@@ -233,17 +232,8 @@ public enum NotificationHelper {
                 body.append("\(trendSymbol)")
             }
 
-            if showPhoneBattery {
-                if !UIDevice.current.isBatteryMonitoringEnabled {
-                    UIDevice.current.isBatteryMonitoringEnabled = true
-                }
-
-                let battery = Double(UIDevice.current.batteryLevel * 100 ).roundTo(places: 1)
-                body2.append(String(format: NSLocalizedString("Phone: %@%%", comment: "Phone: %@%%"), battery))
-            }
-
             if let transmitterBattery = transmitterBattery {
-                body2.append(String(format: NSLocalizedString("Transmitter: %@", comment: "Transmitter: %@"), transmitterBattery))
+                body2.append(String(format: NSLocalizedString("Transmitter: %@%%", comment: "Transmitter: %@%%"), transmitterBattery))
             }
 
             //these are texts that naturally fit on their own line in the body
