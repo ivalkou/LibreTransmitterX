@@ -50,7 +50,7 @@ struct Divided<S: Shape>: Shape {
 private struct ListFooter: View {
     var devicesCount = 0
     var body: some View {
-        Text("Found devices: \(devicesCount)")
+        Text(String(format:NSLocalizedString("Found devices: %d", comment: "Found devices"), devicesCount))
     }
 }
 
