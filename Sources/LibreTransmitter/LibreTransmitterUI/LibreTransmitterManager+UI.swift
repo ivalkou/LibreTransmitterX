@@ -86,6 +86,7 @@ public struct LibreTransmitterSettingsView: UIViewControllerRepresentable {
         )
 
         let nav = SettingsNavigationViewController(rootViewController: settings)
+        nav.navigationItem.title = NSLocalizedString("Libre Bluetooth", comment: "Libre Bluetooth")
         nav.completionDelegate = context.coordinator
 
         doneNotifier.listenOnce { [weak nav] in

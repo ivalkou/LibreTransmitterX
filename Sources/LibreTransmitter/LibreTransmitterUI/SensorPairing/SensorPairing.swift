@@ -6,7 +6,6 @@
 //
 import Foundation
 import Combine
-import CoreNFC
 
 class SensorPairingInfo : ObservableObject {
     @Published private(set) var uuid: Data

@@ -5,6 +5,8 @@
 //  Created by Reimar Metzen on 06.07.21.
 //
 
+#if canImport(CoreNFC)
+
 import Foundation
 import Combine
 import CoreNFC
@@ -326,3 +328,5 @@ fileprivate enum Subcommand: UInt8, CustomStringConvertible {
         }
     }
 }
+
+#endif

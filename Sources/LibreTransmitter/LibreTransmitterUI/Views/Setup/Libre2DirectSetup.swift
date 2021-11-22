@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+#if canImport(CoreNFC)
+
 
 struct Libre2DirectSetup: View {
 
@@ -161,3 +163,5 @@ struct Libre2DirectSetup_Previews: PreviewProvider {
         Libre2DirectSetup(cancelNotifier: GenericObservableObject(), saveNotifier: GenericObservableObject())
     }
 }
+
+#endif

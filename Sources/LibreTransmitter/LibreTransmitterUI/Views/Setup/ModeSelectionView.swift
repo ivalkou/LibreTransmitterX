@@ -16,6 +16,7 @@ struct ModeSelectionView: View {
     var modeSelectSection : some View {
         Section(header: Text("Modes")) {
 
+            #if canImport(CoreNFC)
             ZStack {
                 NavigationLink(destination: Libre2DirectSetup(cancelNotifier: cancelNotifier, saveNotifier: saveNotifier)) {
                     SettingsItem(title: NSLocalizedString("Libre 2 Direct", comment: "Libre 2 Direct"), detail: .constant(""))
@@ -23,6 +24,7 @@ struct ModeSelectionView: View {
                         .padding(.bottom, 30)
                 }
             }
+            #endif
 
             ZStack {
                 NavigationLink(destination: BluetoothSelection(cancelNotifier: cancelNotifier, saveNotifier: saveNotifier)) {

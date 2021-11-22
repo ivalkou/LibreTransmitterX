@@ -39,12 +39,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3818AA43274BFE8A00843DB3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		385670F4272C4E39002C4DD8 = {
 			isa = PBXGroup;
 			children = (
 				385670FF272C4E39002C4DD8 /* LibreTramsmitterExample */,
 				38567116272C5115002C4DD8 /* Packages */,
 				385670FE272C4E39002C4DD8 /* Products */,
+				3818AA43274BFE8A00843DB3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};

@@ -109,8 +109,6 @@ struct SnoozeView: View {
                     Text(formatInterval(self.pickerTimes[$0]))
                 }
             }
-
-            .scaledToFill()
             .pickerStyle(.wheel)
         }
 
@@ -123,16 +121,10 @@ struct SnoozeView: View {
     }
 
     var body: some View {
-        VStack {
-
-            snoozeButton
-            .frame( minHeight: 100, alignment: .top)
-
-            snoozePicker
-            .frame(minHeight: 150, maxHeight: 500, alignment: .center)
-
+        Form {
             snoozeDesc
-            .frame( minHeight: 100, alignment: .bottom)
+            snoozePicker
+            snoozeButton
         }
         .onAppear {
             snoozeDescription = getSnoozeDescription()
