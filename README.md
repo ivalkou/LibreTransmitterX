@@ -1,3 +1,3 @@
 # LibreTransmitter
 
-A description of this package.
+Moved to main FreeAPS X repo https://github.com/ivalkou/freeaps/tree/dev/Dependencies/LibreTransmitter
